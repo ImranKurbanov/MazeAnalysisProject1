@@ -1,4 +1,4 @@
-package com.example.mazeproject;
+package com.example.mazeproject.ui;
 
 import com.example.mazeproject.algorithms.*;
 import com.example.mazeproject.model.Cell;
@@ -17,7 +17,7 @@ public class HelloController {
     @FXML
     private ComboBox<String> sizeComboBox;
     @FXML
-    private ComboBox<String> algorithmComboBox; // NEW: Dropdown for Algorithm
+    private ComboBox<String> algorithmComboBox;
 
     private Cell[][] grid;
     private int rows;
@@ -26,18 +26,15 @@ public class HelloController {
 
     @FXML
     public void initialize() {
-        // Setup Size Dropdown
         sizeComboBox.getItems().addAll("10x10", "50x50", "100x100", "200x200");
         sizeComboBox.getSelectionModel().selectFirst();
 
-        // Setup Algorithm Dropdown
         algorithmComboBox.getItems().addAll("Recursive Backtracker", "Prim's Algorithm");
         algorithmComboBox.getSelectionModel().selectFirst();
     }
 
     @FXML
     protected void onGenerateButtonClick() {
-        // 1. Setup Grid Size
         String selectedSize = sizeComboBox.getValue();
         int size = Integer.parseInt(selectedSize.split("x")[0]);
         this.rows = size;
@@ -51,7 +48,6 @@ public class HelloController {
             }
         }
 
-        // 2. Select Algorithm based on Dropdown
         MazeGenerator generator;
         String selectedAlgo = algorithmComboBox.getValue();
 
@@ -61,13 +57,10 @@ public class HelloController {
             generator = new RecursiveBacktracker();
         }
 
-        // 3. Run Generator
         generator.generate(grid, rows, cols);
 
-        // 4. Add Loops (Optional - keep this if you want multiple paths)
         addLoops(grid, rows, cols);
 
-        // 5. Draw
         drawMaze(grid);
     }
 
@@ -114,7 +107,7 @@ public class HelloController {
     }
 
     private void addLoops(Cell[][] grid, int rows, int cols) {
-        int loopsToMake = (rows * cols) / 20; // 5% loops
+        int loopsToMake = (rows * cols) / 20;
         Random rand = new Random();
         for (int i = 0; i < loopsToMake; i++) {
             int x = rand.nextInt(cols - 1);

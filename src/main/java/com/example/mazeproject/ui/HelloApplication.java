@@ -1,4 +1,4 @@
-package com.example.mazeproject;
+package com.example.mazeproject.ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +10,8 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/mazeproject/hello-view.fxml"));
 
-        // Changed size from 320, 240 to 800, 800 so the maze fits!
         Scene scene = new Scene(fxmlLoader.load(), 800, 800);
 
         stage.setTitle("Maze Generator");
